@@ -1,0 +1,134 @@
+body
+  {
+    background-color: #17a2b8;
+  }
+
+.text-responsive 
+  {
+    font-size: calc(100% + 1vw + 1vh);
+  }
+
+.gray_text
+{
+  /*color:#bbbbbb;*/
+  /*color: #939393;*/
+  color:#7e7e7e;
+}
+
+.tab-inf-box
+{
+  height:390px;
+  background-color:#FFFFFF;
+  padding-left:4px;
+  padding-right:4px;
+  padding-top: 15px;
+}
+.orange-left-line
+{
+  /*Linea color naranja costado izquierdo*/
+  border-left-style: solid;
+  border-left-color: #f0ad4e ;
+  border-left-width: 8px;
+}
+
+.graph-box {
+
+    /*Esquinas lado derecho redondas.*/
+    border-radius: 0px 10px 10px 0px;
+    -moz-border-radius: 0px 10px 10px 0px;
+    -webkit-border-radius: 0px 10px 10px 0px;
+    /*Sombreado de caja.*/
+    -moz-box-shadow: 5px 5px 5px #047586;
+    -webkit-box-shadow: 5px 5px 5px #047586;
+    box-shadow: 5px 5px 5px 5px#047586;
+    /*Ajustes generales de la caja*/
+    background: #ffffff;
+    padding: 20px; 
+    width: 100%;
+    height: 100%;  
+    margin :auto;
+}
+
+.setting-icon{
+  color:white;
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*Estilizar esquinas.*/
+.bottom-rounded-corners
+{
+  border-radius: 0px 0px 3px 3px;
+  -moz-border-radius: 0px 0px 3px 3px;
+  -webkit-border-radius: 0px 0px 3px 3px;
+}
+.right-rounded-corners
+{
+  border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0px 3px 3px 0px;
+}
+
+.left-rounded-corners
+{
+  border-radius: 3px 0px 0px 3px;
+  -moz-border-radius: 3px 0px 0px 3px;
+  -webkit-border-radius: 3px 0px 0px 3px;
+}
+
+.rounded-corners
+{
+  border-radius: 3px 3px 3px 3px;
+  -moz-border-radius: 3px 3px 3px 3px;
+  -webkit-border-radius: 3px 3px 3px 3px;
+}
+
+
+.bottom-shadow 
+{
+  -moz-box-shadow: 0px 5px 5px #047586;
+  -webkit-box-shadow: 0px 5px 5px #047586;
+  box-shadow: 0px 5px 5px#047586;
+}
+
+.right-shadow
+{
+  -moz-box-shadow: 5px 0px 5px #047586;
+  -webkit-box-shadow: 5px 0px 5px #047586;
+  box-shadow: 5px 0px 5px#047586;
+}
+
+.bottom-right-shadow
+{
+  -moz-box-shadow: 5px 5px 5px #047586;
+  -webkit-box-shadow: 5px 5px 5px #047586;
+  box-shadow: 5px 5px 5px#047586;
+}
+
+#manhattan-control-tabs {
+  margin: auto;
+  height: 100%;
+}
+
+hr.dividerlg {
+  max-width: 12.25rem;
+  border-width: 0.2rem;
+  border-color:  #e67e22;
+  margin-top: 1.5rem !important;
+}
+
+hr.dividersm {
+  max-width: 10.25rem;
+  border-width: 0.1rem;
+  /* border-color:  #e67e22;*/
+  margin-top: 0.2rem !important;
+  margin-bottom: 0.55rem !important;
+}
+
+
+.left-text
+{
+  text-align: left !important;
+}
