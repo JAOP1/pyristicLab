@@ -5,7 +5,7 @@ from dash.dependencies import Input, Output, State
 from app import app
 
 import layouts.includes.Dependecies.baseClass as bc
-from layouts.includes.params import _standardInputsEP,_operadoresEP
+from layouts.includes.params import _standardInputsEP,_operadoresEP,_standardInputsGA, _operadoresGA
 
 class EPConfig(bc.BaseConfig):
     _id = "EP"
@@ -20,19 +20,20 @@ class EPConfig(bc.BaseConfig):
                 'mutacionSol': 'mutacionSigma',\
                 'mutacionSigma': 'sigma_blah'}
 
-# class GAConfig(bc.BaseConfig):
-#     _id = "GA"
-#     inputs = _standardInputsGA
-#     operands = _operadoresGA
+class GAConfig(bc.BaseConfig):
+    _id = "GA"
+    _name = "Algoritmos genéticos"
+    inputs = _standardInputsGA
+    operands = _operadoresGA
 
-#     def callback(click, *userInputs):
-#         return {
-#                 'algortimo': 'GA',\
-#                 'seleccionSobrevivientes': 'seleccion mas',\
-#                 'mutacionSol': 'blahMutacion',\
-#                 'cruzaSol': 'blahCruza',\
-#                 'seleccionPadres': 'blahSeleccion'
-#                 }
+    def callback(click, *userInputs):
+        return {
+                'algortimo': 'GA',\
+                'seleccionSobrevivientes': 'seleccion mas',\
+                'mutacionSol': 'blahMutacion',\
+                'cruzaSol': 'blahCruza',\
+                'seleccionPadres': 'blahSeleccion'
+                }
 
 # class EEConfig(bc.BaseConfig):
 #     _id = "EE"
@@ -68,6 +69,6 @@ class pyristicBoard(bc.Dashboard):
                             'name':'Desviación estandar'
                         }]
 # continuosAlgorithmsConfig = [EPConfig, EEConfig, GAConfig]
-continuosAlgorithmsConfig = [EPConfig]
+continuosAlgorithmsConfig = [EPConfig, GAConfig]
 
 discreteAlgorithmsConfig = []
