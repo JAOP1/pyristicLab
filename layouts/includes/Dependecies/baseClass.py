@@ -71,7 +71,7 @@ class operandConfig:
             return  styles
 
     def getLayout(self):
-        return self.dropdown + self.dropdownDivs
+        return [html.Div(self.dropdown + self.dropdownDivs, className='blue-left-line')]
 
 class BaseConfig:
     @classmethod

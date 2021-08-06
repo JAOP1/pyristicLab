@@ -31,6 +31,13 @@ body
   border-left-width: 8px;
 }
 
+.blue-left-line
+{
+  border-left-style: solid;
+  border-left-color: #0e4f9e ;
+  border-left-width: 4px;
+}
+
 .graph-box {
 
     /*Esquinas lado derecho redondas.*/
