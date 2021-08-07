@@ -2,6 +2,8 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 from functools import partial
+import plotly.graph_objects as go
+
 
 def form_group(description, inp):
     #dbc.Tooltip("textooo", target='id-coso')
