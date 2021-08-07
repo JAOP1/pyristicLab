@@ -41,6 +41,7 @@ class operandConfig:
                 'default': 0,\
                 'options': [{'label': self.inputs[i]['label'], 'value': i} for i in range(len(self.inputs))]
                 }
+        # self.dropdown = [dbc.Alert(create_control(dropdownSettings, f'{self.id}-dropdown'), color="success")]
         self.dropdown = [create_control(dropdownSettings, f'{self.id}-dropdown')]
         self.dropdownDivs = []
     
@@ -195,7 +196,7 @@ class Dashboard:
                                     dbc.Col(
                                         html.Div(
                                             [
-                                                html.H4('None',id=f"{item['id']}-value",style={'color':'#696969','paddingTop':'15px'}),
+                                                dbc.Spinner(html.H4('None',id=f"{item['id']}-value",style={'color':'#696969','paddingTop':'15px'}),color='warning'),
                                                 html.Hr(className='dividersm'),
                                                 html.P( f"{item['name']}",className='gray_text')
                                             ],style={'backgroundColor':'rgb(247, 249, 249)','height':'85.8px'}
@@ -229,20 +230,14 @@ class Dashboard:
     @classmethod
     def setupCallback(cls):
         items = [   ('graph','figure'), ('dashboard-title','children')]
-        items += [(element['id'],'children') for element in  cls.statisticsBoxes]
+        items += [(f"{element['id']}-value",'children') for element in  cls.statisticsBoxes]
         
-        @app.callback(
+        app.callback(
             [Output(itemName, itemUpdate) for itemName, itemUpdate in items],
             [Input(f'{metaId}-button','n_clicks') for metaId in cls._idConfigurations],
             [State(f'{metaId}-storage', 'data') for metaId in cls._idConfigurations],
             prevent_initial_call=True
-        )
-        def callback(combinatoryData, continuosData):
-            ctx = dash.callback_context
-            _id = ctx.triggered[0]['prop_id'].split('.')[0]   
-            print(_id)
-            fig = make_graph([1,2,3,4],[1,2,3,4],'Ejemplo',[[2,3],[2,3]],'Número de ejecución','Mejor punto obtenido')
-            return fig,-1,-1,-1,'Metaheurística: Funciona.'
+        )(cls.callback)
 
     @classmethod
     def layout(cls):

@@ -13,13 +13,14 @@
 """
 _standardInputsGA = [
     {
-        "id": "generaciones", 
-        "desc": "Número de generaciones:", 
+        "id": "generaciones",
+        "desc": "Número de generaciones:",
         "default": 10,
         "step": 1,
-        "min": 1},
+        "min": 1
+    },
     {
-        "id": "poblacionGeneracional", 
+        "id": "poblacionGeneracional",
         "desc": "Tamaño de la población:",
         "default": 30,
         "step":1,
@@ -49,15 +50,15 @@ _operadoresGA = [
                 'label':'tournament_sampler',
                 'inputs':[
                     {
-                        "id": "chunk", 
-                        "desc": "Tamaño de grupos:", 
+                        "id": "chunk",
+                        "desc": "Tamaño de grupos:",
                         "default": 2,
                         "step": 1,
                         "min": 2   
                     },
                     {
-                        "id": "prob", 
-                        "desc": "Probabilidad de seleccionar al mejor:", 
+                        "id": "prob",
+                        "desc": "Probabilidad de seleccionar al mejor:",
                         "default": 0.5,
                         "step": 0.01,
                         "min": 0,
@@ -75,8 +76,8 @@ _operadoresGA = [
                 'label': 'n_point_crossover',
                 'inputs':[
                     {
-                        "id": "nPoint", 
-                        "desc": "Número de puntos de cruza:", 
+                        "id": "nPoint",
+                        "desc": "Número de puntos de cruza:",
                         "default": 1,
                         "step": 1,
                         "min": 1   
@@ -87,8 +88,8 @@ _operadoresGA = [
                 'label':'uniform_crossover',
                 'inputs':[
                     {
-                        "id": "uniform", 
-                        "desc": "Probabilidad de cruza:", 
+                        "id": "uniform",
+                        "desc": "Probabilidad de cruza:",
                         "default": 0.5,
                         "step": 0.01,
                         "min": 0,
@@ -100,12 +101,28 @@ _operadoresGA = [
                 'label':'simulated_binary_crossover',
                 'inputs':[
                     {
-                        "id": "simulatedBinary", 
-                        "desc": "nc:", 
+                        "id": "simulatedBinary",
+                        "desc": "nc:",
                         "default": 1  
-                    }  
+                    }
                 ]
-
+            },
+            {
+                'label':'discrete',
+                'inputs':[]
+            },
+            {
+                'label':'intermediate',
+                'inputs': [
+                    {
+                        'id':'alphaGA',
+                        'desc': 'Aporte del P1:',
+                        'default':0.5,
+                        'step':0.1,
+                        'min':0.01,
+                        'max':1
+                    }
+                ]
             }
         ]
     },
@@ -117,7 +134,7 @@ _operadoresGA = [
                 'label':'boundary_mutator',
                 'inputs':[
                     {
-                        "id": "boundInfBoundary", 
+                        "id": "boundInfBoundary",
                         "desc": "Límite inferior:",
                         'default':0
                     },
@@ -125,14 +142,14 @@ _operadoresGA = [
                         "id": 'boundSupBoundary',
                         'desc':'Límite superior:',
                         'default':1
-                    }   
+                    }  
                 ]
             },
             {
                 'label':'uniform_mutator',
                 'inputs':[
                     {
-                        "id": "boundInfUniform", 
+                        "id": "boundInfUniform",
                         "desc": "Límite inferior:",
                         'default':0  
                     },
@@ -140,7 +157,7 @@ _operadoresGA = [
                         "id": 'boundSupUniform',
                         'desc':'Límite superior:',
                         'default':1
-                    }  
+                    }
                 ]
             },
             {
@@ -169,7 +186,7 @@ _operadoresGA = [
                 'inputs':[]
             }
         ]
-    } 
+    }
 ]
 """
 ---------------------------------------------------------------------
@@ -178,13 +195,14 @@ _operadoresGA = [
 """
 _standardInputsES = [
     {
-        "id": "generaciones", 
-        "desc": "Número de generaciones:", 
+        "id": "generaciones",
+        "desc": "Número de generaciones:",
         "default": 10,
         "step": 1,
-        "min": 1},
+        "min": 1
+    },
     {
-        "id": "poblacionGeneracional", 
+        "id": "poblacionGeneracional",
         "desc": "Tamaño de la población padre:",
         "default": 30,
         "step":1,
@@ -211,23 +229,157 @@ _operadoresES = [
         'id': 'crossoverSolES',
         'desc': "Operadores de cruza para la solución:",
         'items': [
-
+            {
+                'label': 'n_point_crossover',
+                'inputs':[
+                    {
+                        "id": "nPoint",
+                        "desc": "Número de puntos de cruza:",
+                        "default": 1,
+                        "step": 1,
+                        "min": 1   
+                    }
+                ]
+            },
+            {
+                'label':'uniform_crossover',
+                'inputs':[
+                    {
+                        "id": "uniform",
+                        "desc": "Probabilidad de cruza:",
+                        "default": 0.5,
+                        "step": 0.01,
+                        "min": 0,
+                        "max":1   
+                    }
+                ]
+            },
+            {
+                'label':'simulated_binary_crossover',
+                'inputs':[
+                    {
+                        "id": "simulatedBinary",
+                        "desc": "nc:",
+                        "default": 1  
+                    }
+                ]
+            },
+            {
+                'label':'discrete',
+                'inputs':[]
+            },
+            {
+                'label':'intermediate',
+                'inputs': [
+                    {
+                        'id':'alphaEEX',
+                        'desc': 'Aporte del P1:',
+                        'default':0.5,
+                        'step':0.1,
+                        'min':0.01,
+                        'max':1
+                    }
+                ]
+            }
         ]
     },
     {
         'id':'mutationSolES',
         'desc':'Operadores de mutación para la solución:',
-        'items': []
+        'items': [
+            {
+                'label':'sigma_mutator',
+                'inputs':[]
+            }
+        ]
     },
     {
         'id':'crossoverSigmaES',
         'desc':'Operadores de cruza para los sigma:',
-        'items':[]
+        'items':[
+            {
+                'label': 'n_point_crossover',
+                'inputs':[
+                    {
+                        "id": "nPoint",
+                        "desc": "Número de puntos de cruza:",
+                        "default": 1,
+                        "step": 1,
+                        "min": 1   
+                    }
+                ]
+            },
+            {
+                'label':'uniform_crossover',
+                'inputs':[
+                    {
+                        "id": "uniform",
+                        "desc": "Probabilidad de cruza:",
+                        "default": 0.5,
+                        "step": 0.01,
+                        "min": 0,
+                        "max":1   
+                    }
+                ]
+            },
+            {
+                'label':'simulated_binary_crossover',
+                'inputs':[
+                    {
+                        "id": "simulatedBinary",
+                        "desc": "nc:",
+                        "default": 1  
+                    }
+                ]
+            },
+            {
+                'label':'discrete',
+                'inputs':[]
+            },
+            {
+                'label':'intermediate',
+                'inputs': [
+                    {
+                        'id':'alphaEESigma',
+                        'desc': 'Aporte del P1:',
+                        'default':0.5,
+                        'step':0.1,
+                        'min':0.01,
+                        'max':1
+                    }
+                ]
+            }
+        ]
     },
     {
         'id':'mutationSigmaES',
         'desc': 'Operadores de mutación para los sigma:',
-        'items':[]
+        'items':[
+            {
+                'label':'single_sigma_adaptive_mutator',
+                'inputs':[
+                    {
+                        'id':'decisionVariables',
+                        'desc':'Variables de decisión',
+                        'default':2,
+                        'step':1,
+                        'min':2               
+                    }
+                ]
+            },
+            {
+                'label':'mult_sigma_adaptive_mutator',
+                'inputs':[
+                    {
+                        'id':'decisionVariables',
+                        'desc':'Variables de decisión',
+                        'default':2,
+                        'step':1,
+                        'min':2                
+                    }
+                ]
+            }
+        ]
     },
     {
         'id':'survivorSelectionES',
@@ -244,7 +396,6 @@ _operadoresES = [
         ]
     }
 ]
-
 """
 ---------------------------------------------------------------------
                     EP configuration
@@ -252,13 +403,14 @@ _operadoresES = [
 """
 _standardInputsEP = [
     {
-        "id": "generaciones", 
-        "desc": "Número de generaciones:", 
+        "id": "generaciones",
+        "desc": "Número de generaciones:",
         "default": 10,
         "step": 1,
-        "min": 1},
+        "min": 1
+    },
     {
-        "id": "poblacionGeneracional", 
+        "id": "poblacionGeneracional",
         "desc": "Tamaño de la población:",
         "default": 30,
         "step":1,
@@ -285,8 +437,8 @@ _operadoresEP = [
                 'label': "sigma_ep_adaptive_mutator",
                 'inputs':[
                     {
-                        "id": "alpha", 
-                        "desc": "Valor alpha:", 
+                        "id": "alpha",
+                        "desc": "Valor alpha:",
                         "default": 0.5,
                         "step": 0.01,
                         "min": 0,
@@ -299,9 +451,8 @@ _operadoresEP = [
                         "step":1,
                         "min":1
                     }
-                ]
-                
-            } 
+                ]                
+            }
         ]
     },
     {
@@ -317,5 +468,5 @@ _operadoresEP = [
                 'inputs':[]
             }
         ]
-    } 
+    }
 ]
