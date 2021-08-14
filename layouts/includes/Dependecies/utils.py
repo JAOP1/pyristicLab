@@ -60,3 +60,13 @@ def make_graph(x_, y_, name, case, xaxis, yaxis):
                     )
     fig.layout.template = 'simple_white'
     return fig
+
+def getInputByContainerOption(paramsStruct):
+    items = paramsStruct['items']
+    array= []
+    ind = 0
+    for i in range(len(items)):
+        item = items[i]
+        array.append([ind, ind + len(item['inputs'])])
+        ind += len(item['inputs'])
+    return  array

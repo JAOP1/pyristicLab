@@ -470,3 +470,12 @@ _operadoresEP = [
         ]
     }
 ]
+
+
+def getOperands(name):
+    if name == 'EP':
+        return _operadoresEP
+    elif name== 'EE':
+        return _operadoresES
+    elif name == 'GA':
+        return _operadoresGA
