@@ -134,7 +134,7 @@ class BaseConfig:
 
         ExecuteButton = [html.Div(
                                 dbc.Button(
-                                    f'Ejecutar {cls._id}',\
+                                    f'Ejecutar',\
                                     color="info",\
                                     outline=True,\
                                     id=f"{cls._id}-button"),\
@@ -291,7 +291,6 @@ class SidebarOptions:
         # self.containerOptions = [ for i in range(len(self.options))]
 
     def setupCallback(self):
-        print("Entra aqui")
         @app.callback(
             [Output( f'sidebar-{i}-content', 'style') for i in range(len(self.options))] + [Output('general-storage','data')],
             Input('optimization-type', 'value'),
@@ -300,7 +299,6 @@ class SidebarOptions:
         def callback(option, *states):
             numOptimizationDivs = len(states)-1
             styles = [{'display':'none'}] * numOptimizationDivs
-            print(option)
             styles[option] = {}
             styles.append({
                 'executions': states[-1]
