@@ -120,7 +120,8 @@ class BaseConfig:
             Input(f'{cls._id}-button','n_clicks'),
             [State(idInput,'value') for idInput in cls._idInputs] + 
             idsDropdown + 
-            idsOptions
+            idsOptions,
+            prevent_initial_call=True
         )(cls.callback)
         
     @classmethod
@@ -175,14 +176,50 @@ class Dashboard:
 
     @classmethod
     def setupLayout(cls):
-        cls.graph_layout = dbc.Container(
-                    dcc.Loading(
-                        dcc.Graph(id=f"graph", 
-                            style={"height": "500px"},
-                            config={'displaylogo': False}
+
+        cls.graph_layout = dbc.Row(
+            [
+                dbc.Col(
+                    dbc.Container(
+                            dcc.Loading(
+                                dcc.Graph(id=f"{cls._id}-graph", 
+                                    style={"height": "500px"},
+                                    config={'displaylogo': False}
+                                )
+                            )
+                            , className='graph-box orange-left-line'
+                        )
+                    ,lg=8,md=8,sm=12
+                ),
+                dbc.Col(
+                        dbc.Card(
+                            [
+                                dbc.CardHeader("Configuración de metaheurística"),
+                                dbc.CardBody(
+                                    # dbc.Table.from_dataframe(df, striped=True, hover=True)
+                                    html.Div(
+                                        dbc.Alert(
+                                            [   
+                                                html.Center(
+                                                    [
+                                                    html.I(className="fas fa-info-circle fa-3x"),
+                                                    html.Br(),
+                                                    html.H4("¡Bienvenido a Pyristic!"),
+                                                    ]
+                                                ),
+                                                html.P("Recuerda actualizar el problema a resolver en el archivo llamado testFile.py")
+                                            ], 
+                                            color="info", style={'height':'250px','paddingTop':'65px'}
+                                        ),
+                                        id = f'{cls._id}-configurationTable' 
+                                        )
+                                ),
+                                dbc.CardFooter(["Tiempo de ejecución: ", html.Span("",id=f"{cls._id}-time")]),
+                            ]
                         )
                     )
-                    , className='graph-box orange-left-line')
+            ],
+        )
 
         content =[]
         for item in cls.statisticsBoxes:
@@ -229,19 +266,26 @@ class Dashboard:
 
     @classmethod
     def setupCallback(cls):
-        items = [   ('graph','figure'), ('dashboard-title','children')]
+        items = [   (f'{cls._id}-graph','figure'), (f'{cls._id}-dashboardTitle','children'), (f"{cls._id}-time",'children')]
         items += [(f"{element['id']}-value",'children') for element in  cls.statisticsBoxes]
         
         app.callback(
             [Output(itemName, itemUpdate) for itemName, itemUpdate in items],
-            [Input(f'{metaId}-button','n_clicks') for metaId in cls._idConfigurations],
-            [State(f'{metaId}-storage', 'data') for metaId in cls._idConfigurations],
+            # [Input(f'{metaId}-button','n_clicks') for metaId in cls._idConfigurations],
+            [Input(f'{metaId}-storage', 'data') for metaId in cls._idConfigurations],
+            [State('optimization-time','value')],
             prevent_initial_call=True
         )(cls.callback)
 
+        app.callback(
+            Output(f'{cls._id}-configurationTable','children'),
+            [Input(f'{metaId}-storage', 'data') for metaId in cls._idConfigurations],
+            prevent_initial_call=True
+        )(cls.callbackConfig)
+
     @classmethod
     def layout(cls):
-        layout_content = [create_title('Metaheurística: No seleccionada',_id='dashboard-title')]
+        layout_content = [create_title('Metaheurística: No seleccionada',_id=f'{cls._id}-dashboardTitle')]
         layout_content.append(cls.outputBox_layout)
         layout_content.append(cls.graph_layout)
         return [html.Div(layout_content, style={'marginTop': '50px'})]
@@ -279,7 +323,10 @@ class SidebarOptions:
         for i in range(len(self.options)):
             if self.options[i]['layout_items'] == []:
                 self.containerOptions.append(html.Div(
-                                            dbc.Alert([ html.I(className="fas fa-info-circle fa-3x"),
+                                            dbc.Alert([ 
+                                                        html.Center(
+                                                            html.I(className="fas fa-info-circle fa-3x"),
+                                                        ),
                                                         html.Br(),
                                                         html.P("Sin algoritmos para mostrar.")], 
                                                         className='rounded-corners',
