@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 from app import app
 import copy
-from layouts.includes.Dependecies.utils import make_graph, getInputByContainerOption
+from layouts.includes.Dependecies.utils import make_graph, getInputByContainerOption, decimalFormat
 import layouts.includes.Dependecies.baseClass as bc
 from layouts.includes.params import _standardInputsEP,\
                                     _operadoresEP,\
@@ -14,6 +14,19 @@ from layouts.includes.params import _standardInputsEP,\
                                     _standardInputsES,\
                                     _operadoresES,\
                                     getOperands
+import layouts.includes.dummyCreateConfig as dm
+from layouts.testFile import optimizationProblem
+import numpy as np
+import pandas as pd
+from pyristic.heuristic.EvolutiveProgramming_search import EvolutionaryProgramming
+from pyristic.heuristic.EvolutionStrategy_search import EvolutionStrategy
+from pyristic.heuristic.GeneticAlgorithm_search import Genetic
+from pyristic.utils.helpers import get_stats
+
+
+def getIndexByName(name):
+    indexDict = {_name: i for i, _name in enumerate(['EP','EE','GA'])}
+    return indexDict[name]
 
 def createDataInput(userInputs, saveLabels, algorithm, firstDropdown, startInput):
     dictInputs = {}
@@ -29,7 +42,7 @@ def createDataInput(userInputs, saveLabels, algorithm, firstDropdown, startInput
         indL,indR = array_[userInputs[firstDropdown+i]]
         dictInputs[f'{labels[i]}Params'] = userInputs[end+ indL : end + indR]
         end += array_[-1][-1]
-    print(dictInputs)
+    # print(dictInputs)
     return dictInputs
 
 class EPConfig(bc.BaseConfig):
@@ -49,7 +62,7 @@ class GAConfig(bc.BaseConfig):
     operands = copy.deepcopy(_operadoresGA)
 
     def callback(click, *userInputs):
-        saveLabels = [  'generation', 'parents',\
+        saveLabels = [  'generations', 'parents',\
                         'parentSelection', 'crossoverX',\
                         'mutationX', 'survivorSelection'
                     ]
@@ -70,9 +83,8 @@ class EEConfig(bc.BaseConfig):
                     ]
         return createDataInput(userInputs,saveLabels, 'EE',4,9)
 
-
-
 class pyristicBoard(bc.Dashboard):
+    _id = "heuristic"
     _idConfigurations = ['EP','EE','GA']
     statisticsBoxes = [{
                             'id': 'average',\
@@ -90,11 +102,62 @@ class pyristicBoard(bc.Dashboard):
                             'name':'Desviación estandar'
                         }]
 
-    def callback(optionEP,optionEE, optionGA, *data):
+
+    def callback(*data):
         ctx = dash.callback_context
-        _id = ctx.triggered[0]['prop_id'].split('.')[0]   
-        fig = make_graph([1,2,3,4],[1,2,3,4],'Ejemplo',[[2,3],[2,3]],dict(title='Número de ejecución'),dict(title='Mejor punto obtenido'))
-        return fig,'Metaheurística: Funciona.',-1,-1,-1
+        _id = ctx.triggered[0]['prop_id'].split('.')[0].split('-')[0] 
+        configurationSaved = data[getIndexByName(_id)]
+        numExecutions = data[-1]
+
+        if _id == 'EP':
+            configuration = dm.dummyCreateConfigEP(configurationSaved)
+            args = (configurationSaved['generation'],\
+                    configurationSaved['parents'],False)
+            optimizationClass =  EvolutionaryProgramming(**optimizationProblem, config=configuration)
+        
+        elif _id == 'EE':
+            configuration = dm.dummyCreateConfigEE(configurationSaved)
+            args = (configurationSaved['generations'],\
+                    configurationSaved['parents'],\
+                    configurationSaved['offsprings'],\
+                    configurationSaved['epsilonSigma'],False)
+            optimizationClass =  EvolutionStrategy(**optimizationProblem, config=configuration)
+
+        elif _id == 'GA':
+            configuration = dm.dummyCreateConfigGA(configurationSaved)
+            args = (configurationSaved['generations'],\
+                    configurationSaved['parents'],False)
+            optimizationClass =  Genetic(**optimizationProblem, config=configuration)
+        print(configuration)
+        statistics = get_stats(optimizationClass, numExecutions, args)
+        print(statistics)
+        IndWorst = np.argmax(statistics['objectiveFunction'])
+        IndBest = np.argmin(statistics['objectiveFunction'])
+        fig = make_graph(list(range(numExecutions)),statistics['objectiveFunction'],\
+                        'f(x)',[[IndWorst,IndBest],[statistics['Worst solution']['f'],statistics['Best solution']['f']]],\
+                        dict(title='Número de ejecución'),dict(title='Valores resultantes de f(x)'))
+        return fig,f'Metaheurística: {_id}', decimalFormat(statistics["averageTime"]), decimalFormat(statistics['Mean']), decimalFormat(statistics['Median']), decimalFormat(statistics['Standard deviation'])
+
+    def callbackConfig(*data):
+        ctx = dash.callback_context
+        _id = ctx.triggered[0]['prop_id'].split('.')[0].split('-')[0] 
+        configurationSaved = data[getIndexByName(_id)]
+        names, options = [],[]
+        if _id == 'EP':
+            names, options = dm.getTableEP(configurationSaved)
+        elif _id == 'EE':
+            names, options = dm.getTableEE(configurationSaved)
+        elif _id == 'GA':
+            names, options = dm.getTableGA(configurationSaved)
+        
+        df = pd.DataFrame(
+                {
+                    "Configuración": names,
+                    "Opción seleccionada": options,
+                }
+            )
+
+        return  html.Div(dbc.Table.from_dataframe(df, striped=True, hover=True),style={'width':'160px'})
 
 continuosAlgorithmsConfig = [EPConfig, EEConfig, GAConfig]
 discreteAlgorithmsConfig = []

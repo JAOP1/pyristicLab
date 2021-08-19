@@ -108,11 +108,11 @@ _operadoresGA = [
                 ]
             },
             {
-                'label':'discrete',
+                'label':'discrete_crossover',
                 'inputs':[]
             },
             {
-                'label':'intermediate',
+                'label':'intermediate_crossover',
                 'inputs': [
                     {
                         'id':'alphaGA',
@@ -230,46 +230,11 @@ _operadoresES = [
         'desc': "Operadores de cruza para la solución:",
         'items': [
             {
-                'label': 'n_point_crossover',
-                'inputs':[
-                    {
-                        "id": "nPoint",
-                        "desc": "Número de puntos de cruza:",
-                        "default": 1,
-                        "step": 1,
-                        "min": 1   
-                    }
-                ]
-            },
-            {
-                'label':'uniform_crossover',
-                'inputs':[
-                    {
-                        "id": "uniform",
-                        "desc": "Probabilidad de cruza:",
-                        "default": 0.5,
-                        "step": 0.01,
-                        "min": 0,
-                        "max":1   
-                    }
-                ]
-            },
-            {
-                'label':'simulated_binary_crossover',
-                'inputs':[
-                    {
-                        "id": "simulatedBinary",
-                        "desc": "nc:",
-                        "default": 1  
-                    }
-                ]
-            },
-            {
-                'label':'discrete',
+                'label':'discrete_crossover',
                 'inputs':[]
             },
             {
-                'label':'intermediate',
+                'label':'intermediate_crossover',
                 'inputs': [
                     {
                         'id':'alphaEEX',
@@ -298,46 +263,11 @@ _operadoresES = [
         'desc':'Operadores de cruza para los sigma:',
         'items':[
             {
-                'label': 'n_point_crossover',
-                'inputs':[
-                    {
-                        "id": "nPoint",
-                        "desc": "Número de puntos de cruza:",
-                        "default": 1,
-                        "step": 1,
-                        "min": 1   
-                    }
-                ]
-            },
-            {
-                'label':'uniform_crossover',
-                'inputs':[
-                    {
-                        "id": "uniform",
-                        "desc": "Probabilidad de cruza:",
-                        "default": 0.5,
-                        "step": 0.01,
-                        "min": 0,
-                        "max":1   
-                    }
-                ]
-            },
-            {
-                'label':'simulated_binary_crossover',
-                'inputs':[
-                    {
-                        "id": "simulatedBinary",
-                        "desc": "nc:",
-                        "default": 1  
-                    }
-                ]
-            },
-            {
-                'label':'discrete',
+                'label':'discrete_crossover',
                 'inputs':[]
             },
             {
-                'label':'intermediate',
+                'label':'intermediate_crossover',
                 'inputs': [
                     {
                         'id':'alphaEESigma',
@@ -437,19 +367,19 @@ _operadoresEP = [
                 'label': "sigma_ep_adaptive_mutator",
                 'inputs':[
                     {
+                        "id": "decisionVariables",
+                        "desc": "Número de variables de decisión:",
+                        "default": 2,
+                        "step":1,
+                        "min":1
+                    },
+                    {
                         "id": "alpha",
                         "desc": "Valor alpha:",
                         "default": 0.5,
                         "step": 0.01,
                         "min": 0,
                         "max": 1   
-                    },
-                    {
-                        "id": "decisionVariables",
-                        "desc": "Número de variables de decisión:",
-                        "default": 2,
-                        "step":1,
-                        "min":1
                     }
                 ]                
             }
