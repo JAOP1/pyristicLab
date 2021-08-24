@@ -132,33 +132,11 @@ _operadoresGA = [
         'items':[
             {
                 'label':'boundary_mutator',
-                'inputs':[
-                    {
-                        "id": "boundInfBoundary",
-                        "desc": "Límite inferior:",
-                        'default':0
-                    },
-                    {
-                        "id": 'boundSupBoundary',
-                        'desc':'Límite superior:',
-                        'default':1
-                    }  
-                ]
+                'inputs':[]
             },
             {
                 'label':'uniform_mutator',
-                'inputs':[
-                    {
-                        "id": "boundInfUniform",
-                        "desc": "Límite inferior:",
-                        'default':0  
-                    },
-                    {
-                        "id": 'boundSupUniform',
-                        'desc':'Límite superior:',
-                        'default':1
-                    }
-                ]
+                'inputs':[]
             },
             {
                 'label':'non_uniform_mutator',
@@ -287,27 +265,11 @@ _operadoresES = [
         'items':[
             {
                 'label':'single_sigma_adaptive_mutator',
-                'inputs':[
-                    {
-                        'id':'decisionVariables',
-                        'desc':'Variables de decisión',
-                        'default':2,
-                        'step':1,
-                        'min':2               
-                    }
-                ]
+                'inputs':[]
             },
             {
                 'label':'mult_sigma_adaptive_mutator',
-                'inputs':[
-                    {
-                        'id':'decisionVariables',
-                        'desc':'Variables de decisión',
-                        'default':2,
-                        'step':1,
-                        'min':2                
-                    }
-                ]
+                'inputs':[ ]
             }
         ]
     },
@@ -366,13 +328,6 @@ _operadoresEP = [
             {
                 'label': "sigma_ep_adaptive_mutator",
                 'inputs':[
-                    {
-                        "id": "decisionVariables",
-                        "desc": "Número de variables de decisión:",
-                        "default": 2,
-                        "step":1,
-                        "min":1
-                    },
                     {
                         "id": "alpha",
                         "desc": "Valor alpha:",

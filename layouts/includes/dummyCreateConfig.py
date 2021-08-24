@@ -16,7 +16,7 @@ def dummyCreateConfigEP(configuration_:dict):
     
     #Operator for sigma.
     if configuration_['mutationSigma'] == 0:
-        configOptimizer.adaptive_mutation(pcMutation.sigma_ep_adaptive_mutator(*configuration_['mutationSigmaParams']))
+        configOptimizer.adaptive_mutation(pcMutation.sigma_ep_adaptive_mutator(optimizationProblem['decision_variables'],*configuration_['mutationSigmaParams']))
 
     #Survivor selection.
     if configuration_['survivorSelection'] == 0:
@@ -45,9 +45,9 @@ def dummyCreateConfigEE(configuration_: dict):
     
     #Operator for mutation sigma.
     if configuration_['mutationSigma'] == 0:
-        configOptimizer.adaptive_mutation(pcMutation.single_sigma_adaptive_mutator(*configuration_['mutationSigmaParams']))
+        configOptimizer.adaptive_mutation(pcMutation.single_sigma_adaptive_mutator(optimizationProblem['decision_variables']))
     elif configuration_['mutationSigma'] == 1:
-        configOptimizer.adaptive_mutation(pcMutation.mult_sigma_adaptive_mutator(*configuration_['mutationSigmaParams']))
+        configOptimizer.adaptive_mutation(pcMutation.mult_sigma_adaptive_mutator(optimizationProblem['decision_variables']))
 
     #Survivor selection.
     if configuration_['survivorSelection'] == 0:
@@ -84,9 +84,9 @@ def dummyCreateConfigGA(configuration_: dict):
         configOptimizer.cross(pcCrossover.intermediate_crossover(*configuration_['crossoverXParams']))
     #Operator for mutation X.
     if configuration_['mutationX'] == 0:
-        configOptimizer.mutate(pcMutation.boundary_mutator(configuration_['mutationXParams']))
+        configOptimizer.mutate(pcMutation.boundary_mutator(optimizationProblem['bounds']))
     elif configuration_['mutationX'] == 1:
-        configOptimizer.mutate(pcMutation.uniform_mutator(configuration_['mutationXParams']))
+        configOptimizer.mutate(pcMutation.uniform_mutator(optimizationProblem['bounds']))
     elif configuration_['mutationX'] == 2:
         configOptimizer.mutate(pcMutation.non_uniform_mutator(*configuration_['mutationXParams']))
 
