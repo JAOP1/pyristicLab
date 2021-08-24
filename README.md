@@ -1,4 +1,7 @@
 # pyristicLab
+Aplicación web diseñada para evaluar la función objetivo empleando los algoritmos de pyristic de manera fácil. 
+¡Sin ninguna línea de código!
+
 
 ## Instalar
 Para ejecutar el proyecto se necesita cumplir los requerimientos:
