@@ -3,8 +3,9 @@ import pyristic.utils.operators.mutation as pcMutation
 import pyristic.utils.operators.crossover as  pcCrossover
 from pyristic.utils.helpers import  EvolutionaryProgrammingConfig,\
                                     GeneticConfig,\
-                                    EvolutionStrategyConfig
-from layouts.testFile import aptitudeFunction
+                                    EvolutionStrategyConfig,\
+                                    ContinuosFixer
+from layouts.testFile import aptitudeFunction, optimizationProblem
 
 
 def dummyCreateConfigEP(configuration_:dict):
@@ -94,7 +95,7 @@ def dummyCreateConfigGA(configuration_: dict):
         configOptimizer.survivor_selection(pcSelection.merge_selector())
     elif configuration_['survivorSelection'] == 1:
         configOptimizer.survivor_selection(pcSelection.replacement_selector())
-    
+    configOptimizer.fixer_invalide_solutions(ContinuosFixer(optimizationProblem['bounds']))
     return configOptimizer
 
 
