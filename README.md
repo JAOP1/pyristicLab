@@ -10,13 +10,22 @@ Para ejecutar el proyecto se necesita cumplir los requerimientos:
 
 ```
 conda create --name pyristic-env
+pip install pyristic
 pip install dash
 pip install dash-bootstrap-components
 ```
+*Sí ya se tiene pyristic instalado, es importante tener la versión más reciente.*
+```
+pip install pyristic --upgrade
+``` 
 
-Finalmente, ejecutar el proyecto como sigue:
+## Observaciones
+Para aplicar pyristicLab, es necesario incluir el problema a resolver en la variable **optimizationProblem** del archivo *testFile.py*. Recuerda que el formato se encuentra descrito en [pyristic funciones de prueba](https://jaop1.github.io/pyristic/helpers/).
+
+## Ejecutar el proyecto
 ```
 python main.py
 ```
+
 
 ¡Listo a optimizar tu función!
