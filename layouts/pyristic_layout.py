@@ -1,7 +1,7 @@
-from layouts.includes.configPyristicLayout import   continuosAlgorithmsConfig,\
+from layouts.configPyristicLayout import   continuosAlgorithmsConfig,\
                                                     discreteAlgorithmsConfig,\
                                                     pyristicBoard
-from layouts.includes.Dependecies.baseClass import SidebarOptions
+from layouts.includes.baseClass import SidebarOptions
 import dash
 import dash_core_components as dcc
 import dash_html_components as html

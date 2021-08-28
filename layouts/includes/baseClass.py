@@ -4,7 +4,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
-from layouts.includes.Dependecies.utils import  form_group,\
+from layouts.includes.utils import  form_group,\
                                         decimalFormat,\
                                         create_title,\
                                         create_control,\

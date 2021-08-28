@@ -5,17 +5,17 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 from app import app
 import copy
-from layouts.includes.Dependecies.utils import make_graph, getInputByContainerOption, decimalFormat
-import layouts.includes.Dependecies.baseClass as bc
-from layouts.includes.params import _standardInputsEP,\
+from layouts.includes.utils import make_graph, getInputByContainerOption, decimalFormat
+import layouts.includes.baseClass as bc
+from layouts.params import _standardInputsEP,\
                                     _operadoresEP,\
                                     _standardInputsGA,\
                                     _operadoresGA,\
                                     _standardInputsES,\
                                     _operadoresES,\
                                     getOperands
-import layouts.includes.dummyCreateConfig as dm
-from layouts.testFile import optimizationProblem
+import layouts.dummyCreateConfig as dm
+from testFile import optimizationProblem
 import numpy as np
 import pandas as pd
 from pyristic.heuristic.EvolutiveProgramming_search import EvolutionaryProgramming

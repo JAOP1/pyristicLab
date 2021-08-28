@@ -5,7 +5,7 @@ from pyristic.utils.helpers import  EvolutionaryProgrammingConfig,\
                                     GeneticConfig,\
                                     EvolutionStrategyConfig,\
                                     ContinuosFixer
-from layouts.testFile import aptitudeFunction, optimizationProblem
+from testFile import aptitudeFunction, optimizationProblem
 
 
 def dummyCreateConfigEP(configuration_:dict):
