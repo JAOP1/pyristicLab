@@ -12,7 +12,8 @@ items_bar = []
 navigation_bar = dbc.Navbar(
     dbc.Container(
         [
-            html.Span("pyristicLab",style={'color':'#4CAF50'})
+            # html.Span("pyristicLab",style={'color':'#4CAF50'})
+            html.Img(src='assets/pyristicPNG.png',alt="logo_pyristic", style={'width':'8%', 'height':'1%'})
         ]
     ),
     color="white",
