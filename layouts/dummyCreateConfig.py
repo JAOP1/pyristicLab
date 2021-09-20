@@ -61,15 +61,14 @@ def dummyCreateConfigGA(configuration_: dict):
     print(configuration_)
     configOptimizer = GeneticConfig()
     #Operator for selection.
-    parameters = [aptitudeFunction] + configuration_['parentSelectionParams']
     if configuration_['parentSelection'] == 0:
-        configOptimizer.parent_selection(pcSelection.roulette_sampler(*parameters))
+        configOptimizer.parent_selection(pcSelection.roulette_sampler())
     elif configuration_['parentSelection'] == 1:
-        configOptimizer.parent_selection(pcSelection.stochastic_universal_sampler(*parameters))
+        configOptimizer.parent_selection(pcSelection.stochastic_universal_sampler())
     elif configuration_['parentSelection'] == 2:
-        configOptimizer.parent_selection(pcSelection.deterministic_sampler(*parameters))
+        configOptimizer.parent_selection(pcSelection.deterministic_sampler())
     elif configuration_['parentSelection'] == 3:
-        configOptimizer.parent_selection(pcSelection.tournament_sampler(*parameters))
+        configOptimizer.parent_selection(pcSelection.tournament_sampler(*configuration_['parentSelectionParams']))
 
     #Operator for crossover X.
     if configuration_['crossoverX'] == 0:
