@@ -15,7 +15,7 @@ from layouts.params import _standardInputsEP,\
                                     _operadoresES,\
                                     getOperands
 import layouts.dummyCreateConfig as dm
-from testFile import optimizationProblem
+from testFile import optimizationProblem, aptitudeFunction
 import numpy as np
 import pandas as pd
 from pyristic.heuristic.EvolutiveProgramming_search import EvolutionaryProgramming
@@ -113,7 +113,12 @@ class pyristicBoard(bc.Dashboard):
             configuration = dm.dummyCreateConfigEP(configurationSaved)
             args = (configurationSaved['generation'],\
                     configurationSaved['parents'],False)
-            optimizationClass =  EvolutionaryProgramming(**optimizationProblem, config=configuration)
+            optimizationClass =  EvolutionaryProgramming(
+                                    function= aptitudeFunction,\
+                                    decision_variables=optimizationProblem['decision_variables'],\
+                                    constraints= optimizationProblem['constraints'],\
+                                    bounds= optimizationProblem['bounds'],\
+                                    config=configuration)
         
         elif _id == 'EE':
             configuration = dm.dummyCreateConfigEE(configurationSaved)
@@ -121,15 +126,25 @@ class pyristicBoard(bc.Dashboard):
                     configurationSaved['parents'],\
                     configurationSaved['offsprings'],\
                     configurationSaved['epsilonSigma'],False)
-            optimizationClass =  EvolutionStrategy(**optimizationProblem, config=configuration)
+            optimizationClass =  EvolutionStrategy(
+                                    function= aptitudeFunction,\
+                                    decision_variables=optimizationProblem['decision_variables'],\
+                                    constraints= optimizationProblem['constraints'],\
+                                    bounds= optimizationProblem['bounds'],\
+                                    config=configuration)
 
         elif _id == 'GA':
             configuration = dm.dummyCreateConfigGA(configurationSaved)
             args = (configurationSaved['generations'],\
                     configurationSaved['parents'],False)
-            optimizationClass =  Genetic(**optimizationProblem, config=configuration)
+            optimizationClass =  Genetic(
+                                    function= aptitudeFunction,\
+                                    decision_variables=optimizationProblem['decision_variables'],\
+                                    constraints= optimizationProblem['constraints'],\
+                                    bounds= optimizationProblem['bounds'],\
+                                    config=configuration)
         print(configuration)
-        statistics = get_stats(optimizationClass, numExecutions, args)
+        statistics = get_stats(optimizationClass, numExecutions, args, transformer=optimizationProblem['function'])
         print(statistics)
         IndWorst = np.argmax(statistics['objectiveFunction'])
         IndBest = np.argmin(statistics['objectiveFunction'])
