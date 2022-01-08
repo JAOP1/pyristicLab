@@ -136,7 +136,7 @@ class pyristicBoard(bc.Dashboard):
         elif _id == 'GA':
             configuration = dm.dummyCreateConfigGA(configurationSaved)
             args = (configurationSaved['generations'],\
-                    configurationSaved['parents'],False)
+                    configurationSaved['parents'],1.0 ,False)
             optimizationClass =  Genetic(
                                     function= aptitudeFunction,\
                                     decision_variables=optimizationProblem['decision_variables'],\
